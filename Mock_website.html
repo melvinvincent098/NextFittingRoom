@@ -9,8 +9,11 @@
 		</style>
 	</head>
 	<body>
+		<button  type="submit" onclick = "load()" > Generate </button>
+
 		<script src="js/three.js"></script>
 		<script src="js/OrbitControls.js"></script>
+		
 		<script>
 			var scene = new THREE.Scene();
 			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -20,29 +23,25 @@
 			renderer.setSize( window.innerWidth, window.innerHeight );
 			document.body.appendChild( renderer.domElement );
 
+
+			function load(){
+
 			var loader = new THREE.ObjectLoader();
-			loader.load("js/myscene.json",function ( obj ) {
+			loader.load("Assets/bodies/male/standard-male.json",function ( obj ) {
+				obj.scale.y = 1;
+				obj.scale.x = 1;
+				obj.scale.z = 1;
      		scene.add( obj );
+     		obj.position.set(-5, -3, 0);
 			});
 
-			var directionalLight = new THREE.DirectionalLight( 0xffeedd );
-			directionalLight.position.set( 0, 0, 1 ).normalize();
-			scene.add( directionalLight );
-
-			var light = new THREE.PointLight(0xffffff);
-        	light.position.set(200,200,200);
-        	scene.add(light);
-
-			var light = new THREE.PointLight(0xffffff);
-        	light.position.set(-400,400,-400);
-        	scene.add(light);
-		
 
 			//var controls = new THREE.OrbitControls( camera );
 			controls = new THREE.OrbitControls(camera, document, renderer.domElement);
 
-			//camera.position.z = 40;
-			camera.position.set( 0, 0, 100 );
+			//camera.position.z = 25;
+			camera.position.set(1, 9, 0);
+		 
 			controls.update();
 
 			function animate() {
@@ -51,10 +50,38 @@
 			renderer.render( scene, camera );
 			}
 			animate();
-			// Our Javascript will go here or will it.
+}
+
+			var light = new THREE.PointLight(0xffffff);
+        	light.position.set(200,200,200);
+        	scene.add(light);
+
+			var light = new THREE.PointLight(0xffffff);
+        	light.position.set(-400,400,-400);
+        	scene.add(light);
+			    
 
 
-			
+
+			// 			var loader = new THREE.ObjectLoader();
+			// loader.load("standard_male/standard-male.json",function ( obj ) {
+			// 	obj.scale.y = 1;
+			// 	obj.scale.x = 1;
+			// 	obj.scale.z= 1;
+   //   		scene.add( obj );
+   //   		obj.position.set(0, 0, 0);
+			// });
+
+			// var directionalLight = new THREE.DirectionalLight( 0xffeedd );
+			// directionalLight.position.set( 0, 0, 1 ).normalize();
+			// scene.add( directionalLight );
+
+
+			// Our Javascript will go here.
 		</script>
 	</body>
 </html>
+
+
+
+

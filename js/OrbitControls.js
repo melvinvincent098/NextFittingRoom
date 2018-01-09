@@ -37,7 +37,10 @@ THREE.OrbitControls = function ( object, domElement, localElement ) {
 
 	// "target" sets the location of focus, where the control orbits around
 	// and where it pans with respect to.
-	this.target = new THREE.Vector3();
+
+	this.target = new THREE.Vector3(0, 0, 0);
+
+	//this.target = obj;
 	// center is old, deprecated; use "target" instead
 	this.center = this.target;
 
@@ -46,25 +49,25 @@ THREE.OrbitControls = function ( object, domElement, localElement ) {
 	this.noZoom = false;
 	this.zoomSpeed = 1.0;
 	// Limits to how far you can dolly in and out
-	this.minDistance = 0;
-	this.maxDistance = Infinity;
+	this.minDistance = 30;
+	this.maxDistance = 42;
 
 	// Set to true to disable this control
 	this.noRotate = false;
 	this.rotateSpeed = 1.0;
 
 	// Set to true to disable this control
-	this.noPan = false;
+	this.noPan = true;
 	this.keyPanSpeed = 7.0;	// pixels moved per arrow key push
 
 	// Set to true to automatically rotate around the target
 	this.autoRotate = false;
-	this.autoRotateSpeed = 2.0; // 30 seconds per round when fps is 60
+	this.autoRotateSpeed = 3.0; // 30 seconds per round when fps is 60
 
 	// How far you can orbit vertically, upper and lower limits.
 	// Range is 0 to Math.PI radians.
-	this.minPolarAngle = 0; // radians
-	this.maxPolarAngle = Math.PI; // radians
+	this.minPolarAngle = 1; // radians
+	this.maxPolarAngle = 1.5;//Math.PI; // radians
 
 	// Set to true to disable use of the keys
 	this.noKeys = false;
@@ -77,6 +80,8 @@ THREE.OrbitControls = function ( object, domElement, localElement ) {
 	var scope = this;
 
 	var EPS = 0.000001;
+
+
 
 	var rotateStart = new THREE.Vector2();
 	var rotateEnd = new THREE.Vector2();
@@ -93,7 +98,7 @@ THREE.OrbitControls = function ( object, domElement, localElement ) {
 	var phiDelta = 0;
 	var thetaDelta = 0;
 	var scale = 1;
-	var pan = new THREE.Vector3(0,5,0);
+	var pan = new THREE.Vector3();
 
 	var lastPosition = new THREE.Vector3();
 
@@ -110,7 +115,6 @@ THREE.OrbitControls = function ( object, domElement, localElement ) {
 		if ( angle === undefined ) {
 
 			angle = getAutoRotationAngle();
-		
 
 		}
 
@@ -129,17 +133,6 @@ THREE.OrbitControls = function ( object, domElement, localElement ) {
 		phiDelta -= angle;
 
 	};
-
-
-	this.autoRotate = function (angle){
-			if ( angle === undefined ) {
-
-			angle = getAutoRotationAngle();
-
-		}
-
-		phiDelta -= angle;
-	}
 
 	// pass in distance in world space to move left
 	this.panLeft = function ( distance ) {
