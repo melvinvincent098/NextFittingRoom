@@ -27,7 +27,16 @@
 			function load(){
 
 			var loader = new THREE.ObjectLoader();
-			loader.load("Assets/bodies/male/standard-male.json",function ( obj ) {
+			loader.load("Assets/bodies/female/female-body.json",function ( obj ) {
+				obj.scale.y = 1;
+				obj.scale.x = 1;
+				obj.scale.z = 1;
+     		scene.add( obj );
+     		obj.position.set(-5, -3, 0);
+     		});
+
+     		var loader = new THREE.ObjectLoader();
+			loader.load("Assets/bodies/male/male-body.json",function ( obj ) {
 				obj.scale.y = 1;
 				obj.scale.x = 1;
 				obj.scale.z = 1;
