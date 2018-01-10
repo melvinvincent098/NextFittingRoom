@@ -38,7 +38,7 @@ THREE.OrbitControls = function ( object, domElement, localElement ) {
 	// "target" sets the location of focus, where the control orbits around
 	// and where it pans with respect to.
 
-	this.target = new THREE.Vector3(0, 0, 0);
+	this.target = new THREE.Vector3(0, 10, 0);
 
 	//this.target = obj;
 	// center is old, deprecated; use "target" instead
@@ -49,8 +49,8 @@ THREE.OrbitControls = function ( object, domElement, localElement ) {
 	this.noZoom = false;
 	this.zoomSpeed = 1.0;
 	// Limits to how far you can dolly in and out
-	this.minDistance = 10;
-	this.maxDistance = 42;
+	this.minDistance = 34;
+	this.maxDistance = 40;
 
 	// Set to true to disable this control
 	this.noRotate = false;

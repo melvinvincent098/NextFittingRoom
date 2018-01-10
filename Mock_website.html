@@ -17,42 +17,90 @@
 		<script>
 			var scene = new THREE.Scene();
 			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-			
+			var mesh;
 
-			var renderer = new THREE.WebGLRenderer();
-			renderer.setSize( window.innerWidth, window.innerHeight );
+			var renderer = new THREE.WebGLRenderer({alpha: true});
+			renderer.setSize( window.innerWidth, window.innerHeight);
 			document.body.appendChild( renderer.domElement );
 
 
-			function load(){
+
+
+
+
+
+function load(){
+
+			//-----------------------------------
+			var textureLoader = new THREE.TextureLoader();
+			  // we've gotta set this to use cross-origin images
+			textureLoader.crossOrigin = true;
+			  // load in the image
+			textureLoader.load('Assets/bodies/male/skin.jpg', function(texture) {
+			  // this code makes the texture repeat
+			texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+			texture.repeat.set( 2, 2 );
+			  // set the texture as the map for the material
+			var material = new THREE.MeshLambertMaterial( {map: texture} );
+			}
+			//-----------------------------------
 
 			var loader = new THREE.ObjectLoader();
-			loader.load("Assets/bodies/female/female-body.json",function ( obj ) {
-				obj.scale.y = 1;
-				obj.scale.x = 1;
-				obj.scale.z = 1;
-     		scene.add( obj );
-     		obj.position.set(-5, -3, 0);
-     		});
-
-     		var loader = new THREE.ObjectLoader();
 			loader.load("Assets/bodies/male/male-body.json",function ( obj ) {
 				obj.scale.y = 1;
 				obj.scale.x = 1;
 				obj.scale.z = 1;
-     		scene.add( obj );
-     		obj.position.set(-5, -3, 0);
-			});
+
+			    obj.traverse( function ( child ) {
+
+        if ( child instanceof THREE.Mesh ) {
+
+            child.material = material;
+
+        }
+
+   			scene.add( obj );
+   			obj.position.set(-5, -3, 0);
+   			});
 
 
-			//var controls = new THREE.OrbitControls( camera );
+
+
+			// var loader = new THREE.JSONLoader();
+			// loader.load( 'Assets/bodies/male/male-body.json', function ( geometry, materials ) {
+   			// var mesh = new THREE.Mesh( geometry, new THREE.MeshFaceMaterial( materials ) );
+   			// scene.add( mesh );
+			// });
+
+
+ 			//var loader = new THREE.ObjectLoader();
+			// loader.load("Assets/bodies/male/male-body.json",function ( obj ) {
+			// 	obj.scale.y = 1;
+			// 	obj.scale.x = 1;
+			// 	obj.scale.z = 1;
+  			//scene.add( obj );
+   			//obj.position.set(-5, -3, 0);
+			// });
+
+		// var loader = new THREE.JSONLoader();
+  //       loader.load( 'Assets/bodies/male/male-body.json', function ( geometry ) {
+  //       var mesh = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial() );
+
+  //                       mesh.position.x =500;
+  //                       mesh.position.y =100;
+  //                       mesh.position.z =500;
+  //       scene.add( mesh );
+
+        //}); 
+
+
+
+
+
+			//CAMERA AND LIGHTS /////////////////////////////////////////////////////
 			controls = new THREE.OrbitControls(camera, document, renderer.domElement);
-
-			//camera.position.z = 25;
-			camera.position.set(1, 9, 0);
-		 
+			camera.position.set(10, 27, 0);
 			controls.update();
-
 			function animate() {
 			requestAnimationFrame( animate );
 			controls.update();
@@ -69,16 +117,22 @@
         	light.position.set(-400,400,-400);
         	scene.add(light);
 			    
+			//CAMERA AND LIGHTS /////////////////////////////////////////////////////
 
 
 
-			// 			var loader = new THREE.ObjectLoader();
+
+
+
+
+
+			// var loader = new THREE.ObjectLoader();
 			// loader.load("standard_male/standard-male.json",function ( obj ) {
 			// 	obj.scale.y = 1;
 			// 	obj.scale.x = 1;
 			// 	obj.scale.z= 1;
-   //   		scene.add( obj );
-   //   		obj.position.set(0, 0, 0);
+  			// scene.add( obj );
+   			// obj.position.set(0, 0, 0);
 			// });
 
 			// var directionalLight = new THREE.DirectionalLight( 0xffeedd );
