@@ -15,14 +15,6 @@
 		<div id="logo">
 			<h1><a href="index.html">next</a></h1>
 			
-			<?php 
-			if(isset($_SESSION['login'])){
-				include('includes/session-logout.inc.php');
-			}
-			else{
-				include('includes/session-login.inc.php');
-			}		
-			?>
 		</div>
 		<nav>
 			<ul>
@@ -41,38 +33,41 @@
 		<div id="content">
             <form name="form1" method="post" action="cms/process/insertRecord.php">
 		            <div class="form">
-
+		            		<div class ="formlable">
 		                  	<label for="UserName">Name</label>
 		                    <input type="text" name="UserName" id="UserName"  class="form-control">
-		                  
+		                  	</div>
 		            </div> 
 		            <div class="form">      
-		                  
+		                  	<div class ="formlable">
 		                    <label for="UserGender">Gender</label>
 		                    <select name="UserGender">
 		                    	<option value="Men">Men</option>
 		                    	<option value="Women">Women</option>
 		                    </select>
+		                </div>
 		                  
 		            </div> 
 		             <div class="form">      
-		                  
+		                  	<div class ="formlable">
 		                    <label for="UserColour">Ethinicity</label>
 		                    <select name="UserColour">
 		                    	<option value="White">White</option>
 		                    	<option value="Black">Black</option>
 		                    </select> 
+		                </div>
 					</div> 
 					 <div class="form">      
-		                  
+		                  <div class ="formlable">
 		                    <label for="UserHairColour">Hair Colour</label>
 		                    <select name="UserHairColour">
 		                    	<option value="Blonde">Blonde</option>
 		                    	<option value="Brown">Brown</option>
 		                    </select> 
+		                </div>
 		            </div> 
 		            <div class="form">          
-		                 
+		                 <div class ="formlable">
 		                    <label for="UserSize">Size</label>
 		                    <select name="UserSize">
 									  <option value="XS">XS</option>
@@ -80,19 +75,20 @@
 									  <option value="M">M</option>
 									  <option value="L">L</option>
 							</select>
+						</div>
 		                  
 		            </div>
 		             <div class="form">          
-		                 
+		                 	<div class ="formlable">
 		                    <label for="UserHeight">Height (cm)</label>
 		                    <input type="text" name="UserHeight" id="UserHeight" class="form-control">
-		                  
+		                  </div>
 		            </div>
 		            <div class="form">  
-		                  
+		                  <div class ="formlable">
 		                    <label for="UserDescription"> Description</label>
 		                    <textarea name="UserDescription" id="UserDescription" class="form-control"></textarea>
-		                  
+		                  </div>
 		            </div> 
 		            <div class="form">             
 		                  <p>

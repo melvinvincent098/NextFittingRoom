@@ -43,7 +43,7 @@ if($_GET['h'] == 'Brown' && $_GET['g'] == 'Women'){
 		<script src="js/three.js"></script>
 		<script src="js/OrbitControls.js"></script>
 		<script src="js/loadFunctions.js"></script>
-		<title>Next Virtual Fitting Room</title>
+		<title>My first three.js app</title>
 	</head>
 	
 	<body>
@@ -51,8 +51,8 @@ if($_GET['h'] == 'Brown' && $_GET['g'] == 'Women'){
 		<div class="topBar">
 		<div id="logo">
 			<h1><a href="index.php">next</a></h1>
+				
 			
-	
 		</div>
 		<nav>
 			<ul>
@@ -66,25 +66,24 @@ if($_GET['h'] == 'Brown' && $_GET['g'] == 'Women'){
 	</header>
 	<div id="container">
 			<div class="button">
-		<ul>
+		
 					<?php if($_GET['g'] == 'Women') {?>
 					
-						
+						<ul>
 						<li><img src="images/dress.png" width="100" height="100" type="submit" onclick = "Add_dress()" ></li>
 						<li><img src="images/trouserf.png" width="100" height="100" type="submit" onclick = "Add_trousers()" ></li>
 						<li><img src="images/t-shirtf.png" width="100" height="100" type="submit" onclick = "Add_top()" ></li>
+						</ul>
 						
 					<?php } if($_GET['g'] == 'Men')  {?>
-					
+						<ul>
 						<li><img src="images/trouserm.png" width="100" height="100" type="submit" onclick = "Add_M_trousers()"  ></li>
 						<li><img src="images/t-shirtm.png" width="100" height="100" type="submit" onclick = "Add_tshirt()" ></li>
 						<li><img src="images/shortsm.png" width="100" height="100" type="submit"  onclick = "Add_shorts()" ></li>
+						</ul>
 
 					<?php	 }?>	
-		</ul>
-
-
-		</div>
+			</div>
 
 		<div id="canvasHolder"></div>
 
@@ -107,7 +106,6 @@ if($_GET['h'] == 'Brown' && $_GET['g'] == 'Women'){
 			var loadedFD = false;
 			var loadedFTs = false;
 			var loadedFT = false;	
-
 
 			var scene = new THREE.Scene();
 			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -195,7 +193,7 @@ if (loadedMTs == false &&  loadedM == true)
 			loader.load("Assets/clothing/male/Male-T-Shirt.json",function ( obj6 ) {
 				obj6.scale.y = 0.75;
 				obj6.scale.x = 0.95;
-				obj6.scale.z = 1;
+				obj6.scale.z = 1.2;
 				obj6.name = "bobs t";
 			obj6.position.set(0.1, 17.2, -0.625);
 			scene.add( obj6 );
@@ -424,6 +422,7 @@ function remove_female_trousers(obj)
 //CAMERA////////////////////////////////////////////////////////////////////////
 			controls = new THREE.OrbitControls(camera, document, renderer.domElement);
 			camera.position.set(10, 27, 30);
+			console.dir(camera.position);
 			controls.update();
 
 
@@ -446,7 +445,7 @@ function remove_female_trousers(obj)
 //ANIMATE LOOP//////////////////////////////////////////////////////////////////
 			function animate() {
 			requestAnimationFrame( animate );
-
+			
 			//controls.update();
 			renderer.render( scene, camera );
 			}
